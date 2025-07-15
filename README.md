@@ -2,7 +2,9 @@
 
 ## Описание
 
-TODO.
+Репозиторий проекта по групповому заданию с поиском ориентиров БПЛА двумя пролётами.
+
+<img width="640" height="480" alt="img_02448" src="https://github.com/user-attachments/assets/61e6ab94-5dc9-4f9b-a5a1-af95a95ddd5f" />
 
 ## Предварительный план
 
