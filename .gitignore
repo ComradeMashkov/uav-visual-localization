@@ -10,5 +10,7 @@ logs/
 *.ckpt
 *.pt
 outputs/
-data/
+data/labeled
+data/raw
+data/yolo_dataset
 .DS_Store
