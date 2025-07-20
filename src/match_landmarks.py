@@ -1,6 +1,7 @@
 import cv2
 import torch
 import csv
+import os
 from ultralytics import YOLO
 from tqdm import tqdm
 
@@ -123,6 +124,10 @@ def main():
     second_video = "../videos/winter.avi"
     save_path = "../resources/media/winter_annotated.mp4"
     weights = "../resources/weights/best.pt"
+
+    media_dir = os.path.dirname(save_path)
+    os.makedirs(media_dir, exist_ok=True)
+
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     print(f"Using device: {device}")
 

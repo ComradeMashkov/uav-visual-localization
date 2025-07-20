@@ -1,6 +1,7 @@
 import cv2
 import torch
 import csv
+import os
 from ultralytics import YOLO
 from tqdm import tqdm
 
@@ -57,6 +58,9 @@ def main():
     video_path = "../videos/summer.avi"
     weights = "../resources/weights/best.pt"
     output_csv = "../resources/results/found_landmarks.csv"
+
+    results_dir = os.path.dirname(output_csv)
+    os.makedirs(results_dir, exist_ok=True)
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     print(f"Using device: {device}")
