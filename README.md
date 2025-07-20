@@ -44,6 +44,10 @@ download_dataset.bat
 ```
 Скрипт автоматически скачает архив с датасетом и распакует его.
 
+### Обучить нейросеть (опционально)
+
+Смотри [notebooks/train.ipynb](https://github.com/ComradeMashkov/uav-visual-localization/blob/main/notebooks/train.ipynb).
+
 ### Записать видео для инференса (опционально)
 1. Активировать виртуальное окружение (если ещё не активировали):
 ```bash
