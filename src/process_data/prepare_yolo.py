@@ -6,6 +6,3 @@ def prepare():
     yolo_out = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../data/yolo_dataset"))
 
     split_labeled_data(labeled, yolo_out)
-
-if __name__ == "__main__":
-    prepare()

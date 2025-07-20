@@ -1,0 +1,10 @@
+ultralytics
+numpy
+opencv-python
+
+torch --pre --extra-index-url https://download.pytorch.org/whl/nightly/cu128
+torchvision --pre --extra-index-url https://download.pytorch.org/whl/nightly/cu128
+torchaudio --pre --extra-index-url https://download.pytorch.org/whl/nightly/cu128
+
+backports.ssl-match-hostname
+-e ./patched_airsim

@@ -1,7 +1,7 @@
 @echo off
 cd /d %~dp0
 
-set "DROPBOX_URL=https://www.dropbox.com/scl/fi/8m8ujy9z0xzdgnbllqhgo/images.zip?rlkey=r2qz07uddvolmazae9i4lmxae&st=ru1fyb79&dl=1"
+set "DROPBOX_URL=https://www.dropbox.com/scl/fi/836ix0cgk21k7xapy75hv/images.zip?rlkey=1wc5zbkhr2epfyomt8qnkjy32&st=9pnc0qm3&dl=1"
 set "ZIP_NAME=images.zip"
 set "TARGET_DIR=labeled"
 
