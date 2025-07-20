@@ -84,7 +84,7 @@ python match_landmarks.py
 <details>
 <summary>Нажмите, чтобы посмотреть видео</summary>
 
-[Видео](resources/media/winter_annotated.mp4)
+![Видео](resources/media/winter_annotated.mp4)
 
 </details>
 
