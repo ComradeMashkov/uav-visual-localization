@@ -82,9 +82,9 @@ python match_landmarks.py
 Пример:
 
 <details>
-<summary>Нажмите, чтобы посмотреть видео</summary>
+<summary>Результаты инференса</summary>
 
-![Видео](resources/media/winter_annotated.mp4)
+[![Видео](resources/media/screen.png)](resources/media/winter_annotated.mp4)
 
 </details>
 
