@@ -55,7 +55,7 @@ def process_video(
 
 
 def main():
-    video_path = "../videos/summer.avi"
+    video_path = "../resources/media/summer.avi"
     weights = "../resources/weights/best.pt"
     output_csv = "../resources/results/found_landmarks.csv"
 

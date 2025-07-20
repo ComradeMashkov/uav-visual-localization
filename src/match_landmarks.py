@@ -121,7 +121,7 @@ def process_second_video(
 
 def main():
     landmarks_csv = "../resources/results/found_landmarks.csv"
-    second_video = "../videos/winter.avi"
+    second_video = "../resources/media/winter.avi"
     save_path = "../resources/media/winter_annotated.mp4"
     weights = "../resources/weights/best.pt"
 
