@@ -79,6 +79,15 @@ python match_landmarks.py
 
 Все полученные результаты лежат в `resources/media`.
 
+Пример:
+
+<details>
+<summary>Нажмите, чтобы посмотреть видео</summary>
+
+[Видео](resources/media/winter_annotated.mp4)
+
+</details>
+
 ### Примечания
 
 В скрипте поиска ориентиров на втором видео используется **IoU (Intersection over Union)** — стандартная метрика для оценки пересечения двух прямоугольников (`bbox`).  
@@ -89,7 +98,7 @@ python match_landmarks.py
 - bbox из второго видео (`detected`)  
 - значение IoU ≥ 0.5 (по умолчанию)
 
-$IoU = \frac{Площадь пересечения}{Площадь объединения}$
+$$IoU = \frac{Площадь \quad пересечения}{Площадь \quad объединения}$$
 
 В коде это реализовано так:
 ```python
