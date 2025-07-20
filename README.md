@@ -84,7 +84,7 @@ python match_landmarks.py
 <details>
 <summary>Результаты инференса</summary>
 
-[![Видео](resources/media/screen.png)](resources/media/winter_annotated.mp4)
+![1](resources/media/winter_annotated.gif)
 
 </details>
 
