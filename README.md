@@ -6,6 +6,126 @@
 
 <img width="640" height="480" alt="img_02448" src="https://github.com/user-attachments/assets/61e6ab94-5dc9-4f9b-a5a1-af95a95ddd5f" />
 
+---
+
+## Инструкция по установке и запуску
+
+### Установка зависимостей
+```bash
+python -m venv .venv
+# активировать виртуальное окружение:
+# Windows:
+.venv\Scripts\activate
+# Linux/Mac:
+source .venv/bin/activate
+
+pip install -r requirements.txt
+```
+
+### Сбор датасета (опционально)
+
+1. Скачать [AirSim (AirSimNH)](https://github.com/microsoft/AirSim/releases/download/v1.8.1-windows/AirSimNH.zip) и запустить симулятор.
+2. В корне проекта активировать виртуальное окружение (если ещё не активировали):
+```bash
+.venv\Scripts\activate
+```
+3. В корне проекта запустить сбор данных:
+```bash
+python -m src.collect_data.main
+```
+4. Дождаться завершения сбора и разметить данные по усмотрению
+
+### Скачать готовый датасет (рекомендуется)
+
+1. Открыть папку `data`
+2. Запустить:
+```bash
+download_dataset.bat
+```
+Скрипт автоматически скачает архив с датасетом и распакует его.
+
+### Записать видео для инференса (опционально)
+1. Активировать виртуальное окружение (если ещё не активировали):
+```bash
+.venv\Scripts\activate
+```
+2. Запустить AirSim.
+3. В корне проекта запустить:
+```bash
+python -m src.record_video.main
+```
+4. При необходимости:
+
+- В файле `src/record_video/main.py` можно изменить сезон (`winter` на `summer`).
+- В AirSim через `F10` можно поменять погоду.
+
+### Провести поиск ориентиров
+
+Перейти в папку `src` и выполнить:
+```bash
+cd src
+python find_landmarks.py
+```
+
+Все полученные результаты лежат в `resources/results`.
+
+### Провести инференс на втором видео
+
+Перейти в папку src и выполнить:
+```bash
+cd src
+python match_landmarks.py
+```
+
+Все полученные результаты лежат в `resources/media`.
+
+### Примечания
+
+В скрипте поиска ориентиров на втором видео используется **IoU (Intersection over Union)** — стандартная метрика для оценки пересечения двух прямоугольников (`bbox`).  
+Сначала детекция выполняется с помощью YOLO, после чего для каждого предсказанного объекта сравнивается:
+
+- класс объекта (например, `building`, `tree` и т.д.)  
+- bbox из первого видео (`ground truth`)  
+- bbox из второго видео (`detected`)  
+- значение IoU ≥ 0.5 (по умолчанию)
+
+$IoU = \frac{Площадь пересечения}{Площадь объединения}$
+
+В коде это реализовано так:
+```python
+def compute_iou(boxA, boxB) -> float:
+    xA = max(boxA[0], boxB[0])
+    yA = max(boxA[1], boxB[1])
+    xB = min(boxA[2], boxB[2])
+    yB = min(boxA[3], boxB[3])
+
+    interArea = max(0, xB - xA + 1) * max(0, yB - yA + 1)
+    boxAArea = (boxA[2] - boxA[0] + 1) * (boxA[3] - boxA[1] + 1)
+    boxBArea = (boxB[2] - boxB[0] + 1) * (boxB[3] - boxB[1] + 1)
+
+    iou = interArea / float(boxAArea + boxBArea - interArea) if (boxAArea + boxBArea - interArea) > 0 else 0
+    return iou
+```
+
+Для каждого кадра:
+
+- загружаются ориентиры, найденные на первом видео (`landmarks_by_frame`)
+- каждый bbox YOLO на кадре сравнивается с ожидаемыми ориентирами:
+
+```python
+if lm["class"] == cls_name:
+    iou = compute_iou(lm["bbox"], det_bbox)
+    if iou >= iou_threshold:
+        # найден!
+```
+
+- если найден - рисуется зелёный прямоугольник, если не найден - красный.
+
+По умолчанию в коде:
+```python
+iou_threshold = 0.5
+```
+
 ## Предварительный план
 
 ### Этап 1
@@ -46,5 +166,5 @@
 
 - [x] Проверяем работу программы на разных видео
 - [x] Оцениваем качество распознавания по метрикам (precision / recall / mAP)
-- [ ] Подготавливаем документацию и краткую инструкцию по запуску
+- [x] Подготавливаем документацию и краткую инструкцию по запуску
 - [ ] Пишем отчёт
